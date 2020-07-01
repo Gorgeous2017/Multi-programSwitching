@@ -18,3 +18,5 @@
    - 应用程序可通过板载ST-Link烧录至板载Flash中
 
 8. **相关的开源软件仓库列表：** [HUAWEI LiteOS](https://gitee.com/LiteOS/LiteOS)
+
+# Git Flow Test Text
