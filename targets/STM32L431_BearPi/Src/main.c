@@ -75,13 +75,13 @@ void JumpAPP_test(void) {
 
 	LCD_ShowString(20, 90, 240, 16, 16, "APP Jump above1");
 
-
-	__set_MSP(STACK_ADDR); /* 设置APP的栈顶 */
 	__disable_irq(); /* 失能中断 */
 
     printf("APP Jump above \n");
 	LCD_ShowString(20, 130, 240, 16, 16, "APP Jump above2");
 
+	__set_MSP(STACK_ADDR); /* 设置APP的栈顶 */
+	
 	jump2app(); /* APP程序跳转 */
 
 }
