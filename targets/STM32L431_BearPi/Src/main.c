@@ -35,7 +35,7 @@
 #include "sys_init.h"
 
 #include "los_base.h"
-#include "los_task.ph"
+#include "los_task.h"
 #include "los_typedef.h"
 #include "los_sys.h"
 
