@@ -82,16 +82,13 @@ void JumpAPP_test(void) {
 
 int main(void)
 {
+    __enable_irq();
+    SCB->VTOR = 0x8020000;
+
     // UINT32 uwRet = LOS_OK;
     HardWare_Init();
 
-    printf("BootLoader Project test \n");
-
-    HAL_Delay(2000);
-
-    JumpAPP_test();
-
-    printf("APP Jump below \n");
+    printf("\n>>>>>>>>>>!! APP Jump successfully \n");
 
     // uwRet = LOS_KernelInit();
     // if (uwRet != LOS_OK)
