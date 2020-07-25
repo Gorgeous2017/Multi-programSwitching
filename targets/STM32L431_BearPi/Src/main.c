@@ -64,7 +64,7 @@ void JumpAPP_test(void) {
     
     typedef  void (*iapfun)(void); /* 函数指针实现APP工程寻址与程序跳转 */
 
-	uint32_t JUMP_ADDR = 0x08004000; /* APP程序基地址 */
+	uint32_t JUMP_ADDR = 0x08020000; /* APP程序基地址 */
 	uint32_t STACK_ADDR = 0x20000000; /* APP程序栈地址 */
 	uint32_t RESET_IRQ_ADDR = JUMP_ADDR + 4; /* 中断向量表地址 */
 
