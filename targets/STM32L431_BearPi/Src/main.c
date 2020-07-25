@@ -54,10 +54,11 @@ VOID HardWare_Init(VOID)
 	LCD_Init();					
 	LCD_Clear(WHITE);		   	
 	POINT_COLOR = RED;			
-	LCD_ShowString(10, 50, 240, 24, 24, "Welcome to IoTCluB!");
-	LCD_ShowString(20, 90, 240, 16, 16, "BearPi IoT Develop Board");
-	LCD_ShowString(20, 130, 240, 16, 16, "Powerd by Huawei LiteOS!");
-	LCD_ShowString(10, 170, 240, 16, 16, "Please wait for system init");
+	LCD_ShowString(10, 50, 240, 16, 16, "BootLoader Project test");
+	//LCD_ShowString(10, 50, 240, 24, 24, "Welcome to IoTCluB!");
+	// LCD_ShowString(20, 90, 240, 16, 16, "BearPi IoT Develop Board");
+	// LCD_ShowString(20, 130, 240, 16, 16, "Powerd by Huawei LiteOS!");
+	// LCD_ShowString(10, 170, 240, 16, 16, "Please wait for system init");
 }
 
 void JumpAPP_test(void) {
@@ -71,10 +72,15 @@ void JumpAPP_test(void) {
 	iapfun jump2app; /* 声明跳转函数 */
 
 	jump2app = (iapfun)*(volatile uint32_t *)RESET_IRQ_ADDR; /* APP地址赋值 */
+
+	LCD_ShowString(20, 90, 240, 16, 16, "APP Jump above1");
+
+
 	__set_MSP(STACK_ADDR); /* 设置APP的栈顶 */
 	__disable_irq(); /* 失能中断 */
 
     printf("APP Jump above \n");
+	LCD_ShowString(20, 130, 240, 16, 16, "APP Jump above2");
 
 	jump2app(); /* APP程序跳转 */
 
@@ -87,7 +93,7 @@ int main(void)
 
     printf("BootLoader Project test \n");
 
-    HAL_Delay(2000);
+    //HAL_Delay(2000);
 
     JumpAPP_test();
 
