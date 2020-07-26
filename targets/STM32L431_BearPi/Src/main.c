@@ -71,16 +71,21 @@ void JumpAPP_test(void) {
 
 	iapfun jump2app; /* 声明跳转函数 */
 
+	__disable_irq(); /* 失能中断 */
+	
 	jump2app = (iapfun)*(volatile uint32_t *)RESET_IRQ_ADDR; /* APP地址赋值 */
+	//jump2app = (void () (void)) (((volatile uint32_t *)(RESET_IRQ_ADDR))); /* APP地址赋值 */
 
 	LCD_ShowString(20, 90, 240, 16, 16, "APP Jump above1");
-
-	__disable_irq(); /* 失能中断 */
 
     printf("APP Jump above \n");
 	LCD_ShowString(20, 130, 240, 16, 16, "APP Jump above2");
 
-	__set_MSP(STACK_ADDR); /* 设置APP的栈顶 */
+	//HAL_RCC_DeInit(); /* 关闭外设 */
+
+	HAL_DeInit(); /* 复位外设 */
+
+	__set_MSP(JUMP_ADDR); /* 设置APP的栈顶 */
 	
 	jump2app(); /* APP程序跳转 */
 
