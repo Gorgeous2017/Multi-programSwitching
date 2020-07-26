@@ -933,7 +933,7 @@ typedef struct
 /** @addtogroup Peripheral_memory_map
   * @{
   */
-#define FLASH_BASE            (0x08020000UL) /*!< FLASH(up to 256 KB) base address */
+#define FLASH_BASE            (0x08000000UL) /*!< FLASH(up to 256 KB) base address */
 #define SRAM1_BASE            (0x20000000UL) /*!< SRAM1(up to 48 KB) base address */
 #define SRAM2_BASE            (0x10000000UL) /*!< SRAM2(16 KB) base address */
 #define PERIPH_BASE           (0x40000000UL) /*!< Peripheral base address */

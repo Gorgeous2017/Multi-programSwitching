@@ -89,6 +89,7 @@ int main(void)
     HardWare_Init();
 
     printf("\n>>>>>>>>>>!! APP Jump successfully \n");
+	LCD_ShowString(10, 170, 240, 16, 16, "APP Jump successfully");
 
     // uwRet = LOS_KernelInit();
     // if (uwRet != LOS_OK)
