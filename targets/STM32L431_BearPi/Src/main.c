@@ -61,19 +61,19 @@ VOID HardWare_Init(VOID)
 	// LCD_ShowString(10, 170, 240, 16, 16, "Please wait for system init");
 }
 
+void (*pIapFun)(void); /* 函数指针实现APP工程寻址与程序跳转 */
+
 void JumpAPP_test(void) {
     
-    typedef  void (*iapfun)(void); /* 函数指针实现APP工程寻址与程序跳转 */
-
 	uint32_t JUMP_ADDR = 0x08020000; /* APP程序基地址 */
 	uint32_t STACK_ADDR = 0x20000000; /* APP程序栈地址 */
-	uint32_t RESET_IRQ_ADDR = JUMP_ADDR + 4; /* 中断向量表地址 */
-
-	iapfun jump2app; /* 声明跳转函数 */
+	uint32_t RESET_IRQ_ADDR; /* 中断向量表地址 */
 
 	__disable_irq(); /* 失能中断 */
+
+    RESET_IRQ_ADDR = *(volatile uint32_t *)(JUMP_ADDR + 4);
 	
-	jump2app = (iapfun)*(volatile uint32_t *)RESET_IRQ_ADDR; /* APP地址赋值 */
+	pIapFun =  (void (*)(void))RESET_IRQ_ADDR;/* APP地址赋值 */
 	//jump2app = (void () (void)) (((volatile uint32_t *)(RESET_IRQ_ADDR))); /* APP地址赋值 */
 
 	LCD_ShowString(20, 90, 240, 16, 16, "APP Jump above1");
@@ -87,7 +87,9 @@ void JumpAPP_test(void) {
 
 	__set_MSP(JUMP_ADDR); /* 设置APP的栈顶 */
 	
-	jump2app(); /* APP程序跳转 */
+	//(pIapFun)(); /* APP程序跳转 */
+
+    (*(void(*)())0x08020004)();
 
 }
 
