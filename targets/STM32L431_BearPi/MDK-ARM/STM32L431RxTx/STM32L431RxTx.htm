@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\STM32L431RxTx\STM32L431RxTx.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\STM32L431RxTx\STM32L431RxTx.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sun Jul 26 21:26:02 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Jul 27 11:03:56 2020
 <BR><P>
 <H3>Maximum Stack Usage =        296 bytes + Unknown(Functions without stacksize, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -423,8 +423,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[3e]"></a>JumpAPP_test</STRONG> (Thumb, 78 bytes, Stack size 32 bytes, main.o(i.JumpAPP_test))
-<BR><BR>[Stack]<UL><LI>Max Depth = 272<LI>Call Chain = JumpAPP_test &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_Address_Set &rArr; LCD_Write_Data &rArr; LCD_SPI_Send &rArr; SPI2_WriteByte &rArr; HAL_SPI_Transmit &rArr; SPI_EndRxTxTransaction &rArr; SPI_WaitFifoStateUntilTimeout &rArr; HAL_GetTick
+<P><STRONG><a name="[3e]"></a>JumpAPP_test</STRONG> (Thumb, 80 bytes, Stack size 24 bytes, main.o(i.JumpAPP_test))
+<BR><BR>[Stack]<UL><LI>Max Depth = 264<LI>Call Chain = JumpAPP_test &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_Address_Set &rArr; LCD_Write_Data &rArr; LCD_SPI_Send &rArr; SPI2_WriteByte &rArr; HAL_SPI_Transmit &rArr; SPI_EndRxTxTransaction &rArr; SPI_WaitFifoStateUntilTimeout &rArr; HAL_GetTick
 </UL>
 <BR>[Calls]<UL><LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ShowString
 <LI><a href="#[14]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DeInit
