@@ -64,7 +64,7 @@ VOID HardWare_Init(VOID)
 //void (*pIapFun)(void); /* 函数指针实现APP工程寻址与程序跳转 */
 
 typedef void(*pFunction)(void);
-#define APP_ADDR			0x8004000
+#define APP_ADDR			0x8020000
 
 void JumpAPP_test(void) {
     
@@ -95,7 +95,7 @@ void JumpAPP_test(void) {
 	LCD_ShowString(20, 90, 240, 16, 16, "APP Jump above1");
     printf("APP Jump above \n");
 
-    if (((*(__IO uint32_t*)APP_ADDR) & 0x2FFF0000 ) == 0x20000000) {
+    if (((*(__IO uint32_t*)APP_ADDR) & 0x2FFE0000 ) == 0x20000000) {
         /* Jump to user application */
         JumpAddress = *(__IO uint32_t*) (APP_ADDR + 4);
         Jump_To_App = (pFunction) JumpAddress;
