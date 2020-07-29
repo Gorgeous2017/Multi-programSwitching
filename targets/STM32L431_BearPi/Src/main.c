@@ -59,6 +59,9 @@ VOID HardWare_Init(VOID)
 	// LCD_ShowString(20, 90, 240, 16, 16, "BearPi IoT Develop Board");
 	// LCD_ShowString(20, 130, 240, 16, 16, "Powerd by Huawei LiteOS!");
 	// LCD_ShowString(10, 170, 240, 16, 16, "Please wait for system init");
+	Init_E53_SC1();
+	HAL_GPIO_WritePin(SC1_Light_GPIO_Port,SC1_Light_Pin,GPIO_PIN_SET);  				
+
 }
 
 //void (*pIapFun)(void); /* 函数指针实现APP工程寻址与程序跳转 */
