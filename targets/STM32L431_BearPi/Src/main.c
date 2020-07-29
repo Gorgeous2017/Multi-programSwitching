@@ -49,6 +49,8 @@ VOID HardWare_Init(VOID)
 	/* Configure the system clock */
 	SystemClock_Config();
 	MX_GPIO_Init();
+	
+	Init_E53_SC1();
 
 	HAL_GPIO_WritePin(SC1_Light_GPIO_Port,SC1_Light_Pin,GPIO_PIN_SET);  /* E53_SC1 拓展板亮灯测试 */
 
@@ -90,6 +92,8 @@ int main(void)
 
     // UINT32 uwRet = LOS_OK;
     HardWare_Init();
+	
+	while(1);
 
     // printf("\n>>>>>>>>>>!! APP Jump successfully \n");
 	// LCD_ShowString(10, 170, 240, 16, 16, "APP Jump successfully");
