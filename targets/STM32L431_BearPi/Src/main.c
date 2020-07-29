@@ -49,15 +49,18 @@ VOID HardWare_Init(VOID)
 	/* Configure the system clock */
 	SystemClock_Config();
 	MX_GPIO_Init();
-	MX_USART1_UART_Init();
-	dwt_delay_init(SystemCoreClock);
-	LCD_Init();					
-	LCD_Clear(WHITE);		   	
-	POINT_COLOR = RED;			
-	LCD_ShowString(10, 50, 240, 24, 24, "Welcome to IoTCluB!");
-	LCD_ShowString(20, 90, 240, 16, 16, "BearPi IoT Develop Board");
-	LCD_ShowString(20, 130, 240, 16, 16, "Powerd by Huawei LiteOS!");
-	LCD_ShowString(10, 170, 240, 16, 16, "Please wait for system init");
+
+	HAL_GPIO_WritePin(SC1_Light_GPIO_Port,SC1_Light_Pin,GPIO_PIN_SET);  /* E53_SC1 拓展板亮灯测试 */
+
+	// MX_USART1_UART_Init();
+	// dwt_delay_init(SystemCoreClock);
+	// LCD_Init();					
+	// LCD_Clear(WHITE);		   	
+	// POINT_COLOR = RED;			
+	// LCD_ShowString(10, 50, 240, 24, 24, "Welcome to IoTCluB!");
+	// LCD_ShowString(20, 90, 240, 16, 16, "BearPi IoT Develop Board");
+	// LCD_ShowString(20, 130, 240, 16, 16, "Powerd by Huawei LiteOS!");
+	// LCD_ShowString(10, 170, 240, 16, 16, "Please wait for system init");
 }
 
 void JumpAPP_test(void) {
@@ -88,8 +91,8 @@ int main(void)
     // UINT32 uwRet = LOS_OK;
     HardWare_Init();
 
-    printf("\n>>>>>>>>>>!! APP Jump successfully \n");
-	LCD_ShowString(10, 170, 240, 16, 16, "APP Jump successfully");
+    // printf("\n>>>>>>>>>>!! APP Jump successfully \n");
+	// LCD_ShowString(10, 170, 240, 16, 16, "APP Jump successfully");
 
     // uwRet = LOS_KernelInit();
     // if (uwRet != LOS_OK)
