@@ -45,10 +45,10 @@ E53_SC1_Data_TypeDef E53_SC1_Data;
 
 VOID HardWare_Init(VOID)
 {
-	HAL_Init();
+	//HAL_Init();
 	/* Configure the system clock */
-	SystemClock_Config();
-	MX_GPIO_Init();
+	//SystemClock_Config();
+	//MX_GPIO_Init();
 	
 	Init_E53_SC1();
 
