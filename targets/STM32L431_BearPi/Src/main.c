@@ -90,6 +90,8 @@ int main(void)
     __enable_irq();
     SCB->VTOR = 0x8020000;
 
+	LCD_ShowString(10, 170, 240, 16, 16, "APP Jump successfully");
+	
     // UINT32 uwRet = LOS_OK;
     HardWare_Init();
 	
