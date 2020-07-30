@@ -59,15 +59,15 @@ VOID HardWare_Init(VOID)
 	// LCD_ShowString(20, 90, 240, 16, 16, "BearPi IoT Develop Board");
 	// LCD_ShowString(20, 130, 240, 16, 16, "Powerd by Huawei LiteOS!");
 	// LCD_ShowString(10, 170, 240, 16, 16, "Please wait for system init");
-	Init_E53_SC1();
-	HAL_GPIO_WritePin(SC1_Light_GPIO_Port,SC1_Light_Pin,GPIO_PIN_SET);  				
+	//Init_E53_SC1();
+	//HAL_GPIO_WritePin(SC1_Light_GPIO_Port,SC1_Light_Pin,GPIO_PIN_SET);  				
 
 }
 
 //void (*pIapFun)(void); /* 函数指针实现APP工程寻址与程序跳转 */
 
 typedef void(*pFunction)(void);
-#define APP_ADDR			0x8020000
+#define APP_ADDR			0x8020000UL
 
 void JumpAPP_test(void) {
     
@@ -78,17 +78,13 @@ void JumpAPP_test(void) {
     uint32_t JumpAddress;
     pFunction Jump_To_App;
 
+	//__set_FAULTMASK();
 	__disable_irq(); /* 失能中断 */
 
     //RESET_IRQ_ADDR = *(volatile uint32_t *)(JUMP_ADDR + 4);
 	
 	//pIapFun =  (void (*)(void))RESET_IRQ_ADDR;/* APP地址赋值 */
 	//jump2app = (void () (void)) (((volatile uint32_t *)(RESET_IRQ_ADDR))); /* APP地址赋值 */
-
-
-
-	//HAL_RCC_DeInit(); /* 关闭外设 */
-
 
 	//__set_MSP(JUMP_ADDR); /* 设置APP的栈顶 */
 	
@@ -105,7 +101,8 @@ void JumpAPP_test(void) {
 
 	    LCD_ShowString(20, 130, 240, 16, 16, "APP Jump above2");
 
-	    HAL_DeInit(); /* 复位外设 */
+	    //HAL_DeInit(); /* 复位外设 */
+		//HAL_RCC_DeInit(); /* 关闭外设 */
         /* Initialize user application's Stack Pointer */
         __set_MSP(*(__IO uint32_t*) APP_ADDR);
 
@@ -126,6 +123,7 @@ int main(void)
     JumpAPP_test();
 
     printf("APP Jump below \n");
+	while(1);
 
     // uwRet = LOS_KernelInit();
     // if (uwRet != LOS_OK)
