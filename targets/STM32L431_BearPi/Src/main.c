@@ -90,10 +90,14 @@ int main(void)
     __enable_irq();
     SCB->VTOR = 0x8020000;
 
-	LCD_ShowString(10, 170, 240, 16, 16, "APP Jump successfully");
+	//LCD_ShowString(10, 170, 240, 16, 16, "APP Jump successfully");
+	
+	Init_E53_SC1();
+
+	HAL_GPIO_WritePin(SC1_Light_GPIO_Port,SC1_Light_Pin,GPIO_PIN_SET);  /* E53_SC1 拓展板亮灯测试 */
 	
     // UINT32 uwRet = LOS_OK;
-    HardWare_Init();
+    // HardWare_Init();
 	
 	while(1);
 
