@@ -106,9 +106,13 @@ VOID app_data_report_collection(VOID)
 
 		E53_SC1_Read_Data();	
 		printf("\r\n******************************Lux Value is  %d\r\n",(int)E53_SC1_Data.Lux);
-		LCD_ShowString(10, 200, 200, 16, 16, "Lux Value is:");
-		LCD_ShowNum(140, 200, (int)E53_SC1_Data.Lux, 5, 16);
-		sprintf(t_report_buf + 2,"%04X", (int)E53_SC1_Data.Lux);	  
+		// LCD_ShowString(10, 200, 200, 16, 16, "Lux Value is:");
+		// LCD_ShowNum(140, 200, (int)E53_SC1_Data.Lux, 5, 16);
+
+        LCD_ShowString(70, 100, 200, 16, 16, "Lux Value is:");
+	    LCD_ShowNum(180, 100, (int)E53_SC1_Data.Lux, 5, 24);
+
+		sprintf(t_report_buf + 2,"%04X", (int)E53_SC1_Data.Lux);
 		uwRet=LOS_TaskDelay(2000);
 		if(uwRet !=LOS_OK)
 		return;

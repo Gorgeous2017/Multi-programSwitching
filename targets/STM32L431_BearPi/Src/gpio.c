@@ -68,24 +68,20 @@ void MX_GPIO_Init(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
-	 /*Configure GPIO pin Output Level */
+	/* Configure GPIO pin Output Level */
 
 
-  /*Configure GPIO pin : PA0 */
+  /* Configure F1 GPIO pin : PB2 */
   GPIO_InitStruct.Pin = GPIO_PIN_2;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_PULLUP; /* 根据原理图，按键接地，所以引脚电平上拉 */
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
- 
-  // /* EXTI interrupt init*/
-  // HAL_NVIC_SetPriority(EXTI2_IRQn, 2, 0);
-  // HAL_NVIC_EnableIRQ(EXTI2_IRQn);
 
-
-	
-	 /*Configure GPIO pin : PtPin */
-
-
+  /* Configure F1 GPIO pin : PB3 */
+  GPIO_InitStruct.Pin = GPIO_PIN_3;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+  GPIO_InitStruct.Pull = GPIO_PULLUP; /* 根据原理图，按键接地，所以引脚电平上拉 */
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 }
 

@@ -77,12 +77,13 @@ void Init_E53_SC1(void)
 ***************************************************************/
 void E53_SC1_Read_Data(void)
 {
-	
 	Start_BH1750();
-	HAL_Delay(180);
+	//HAL_Delay(180);
 	HAL_I2C_Master_Receive(&hi2c1, BH1750_Addr+1,BUF,2,0xff); 
 	result=BUF[0];
 	result=(result<<8)+BUF[1];  //合成数据，即光照数据	
 	E53_SC1_Data.Lux=(float)(result/1.2);
     
+	printf("\r\n %d \r\n",(int)E53_SC1_Data.Lux);
+
 }
