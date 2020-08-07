@@ -25,11 +25,11 @@ const int16_t POLYNOMIAL = 0x131;
 * 参    数: 无
 * 返 回 值: 无
 ***************************************************************/
-void Init_BH1750(void)
-{
-    uint8_t t_Data = 0x01;
-    HAL_I2C_Master_Transmit(&hi2c1,BH1750_Addr,&t_Data,1,0xff);
-}
+// void Init_BH1750(void)
+// {
+//     uint8_t t_Data = 0x01;
+//     HAL_I2C_Master_Transmit(&hi2c1,BH1750_Addr,&t_Data,1,0xff);
+// }
 
 /***************************************************************
 * 函数名称: Start_BH1750
@@ -37,11 +37,11 @@ void Init_BH1750(void)
 * 参    数: 无
 * 返 回 值: 无
 ***************************************************************/
-void Start_BH1750(void)
-{
-    uint8_t t_Data = 0x10;
-    HAL_I2C_Master_Transmit(&hi2c1,BH1750_Addr,&t_Data,1,0xff); 
-}
+// void Start_BH1750(void)
+// {
+//     uint8_t t_Data = 0x10;
+//     HAL_I2C_Master_Transmit(&hi2c1,BH1750_Addr,&t_Data,1,0xff); 
+// }
 
 /***************************************************************
 * 函数名称: Convert_BH1750
@@ -191,23 +191,23 @@ void Init_Motor(void)
 * 参    数: 无
 * 返 回 值: 无
 ***************************************************************/
-void Init_Light(void)
-{
-  GPIO_InitTypeDef GPIO_InitStruct;
+// void Init_Light(void)
+// {
+//   GPIO_InitTypeDef GPIO_InitStruct;
 
-  /* GPIO Ports Clock Enable */
-  IA1_Light_GPIO_CLK_ENABLE();
+//   /* GPIO Ports Clock Enable */
+//   IA1_Light_GPIO_CLK_ENABLE();
 
-	 /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(IA1_Light_GPIO_Port, IA1_Light_Pin, GPIO_PIN_RESET);
+// 	 /*Configure GPIO pin Output Level */
+//   HAL_GPIO_WritePin(IA1_Light_GPIO_Port, IA1_Light_Pin, GPIO_PIN_RESET);
 	
-	 /*Configure GPIO pin : PtPin */
-  GPIO_InitStruct.Pin = IA1_Light_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(IA1_Light_GPIO_Port, &GPIO_InitStruct);
-}
+// 	 /*Configure GPIO pin : PtPin */
+//   GPIO_InitStruct.Pin = IA1_Light_Pin;
+//   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+//   GPIO_InitStruct.Pull = GPIO_NOPULL;
+//   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+//   HAL_GPIO_Init(IA1_Light_GPIO_Port, &GPIO_InitStruct);
+// }
 /***************************************************************
 * 函数名称: Init_E53_IA1
 * 说    明: 初始化Init_E53_IA1
@@ -217,10 +217,10 @@ void Init_Light(void)
 void Init_E53_IA1(void)
 {
    	MX_I2C1_Init();
-    Init_BH1750();
+    // Init_BH1750();
 		Init_SHT30();
 		Init_Motor();
-		Init_Light();
+		// Init_Light();
 }
 
 /***************************************************************

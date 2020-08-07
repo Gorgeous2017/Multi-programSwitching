@@ -44,6 +44,7 @@
 char s_resp_buf[14] = {0};
 uint32_t reply_sem;
 E53_SC1_Data_TypeDef E53_SC1_Data;
+E53_IA1_Data_TypeDef E53_IA1_Data;
 
 VOID HardWare_Init(VOID)
 {

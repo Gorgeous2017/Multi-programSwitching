@@ -19,6 +19,7 @@
 #include "stm32l4xx_hal.h"
 #include "lcd.h"
 #include "E53_SC1.h"
+#include "E53_IA1.h"
 
 
 /* Exported typedef -----------------------------------------------------------*/

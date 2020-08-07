@@ -61,6 +61,7 @@
 #include "spi.h"
 #include "lcd.h"
 #include "E53_SC1.h"
+#include "E53_IA1.h"
 
 #ifdef WITH_DTLS
 #include "mbedtls/net.h"

@@ -86,8 +86,10 @@ void UI_MsgInit(void)
 	exmpl_string[4].start_y = 120;
 
 	extern UINT32 creat_collection_task();
+	extern UINT32 creat_ia1_collection_task();
 
 	exmpl_string[1].creat_task = creat_collection_task;
+	exmpl_string[2].creat_task = creat_ia1_collection_task;
 
 
 	strcpy(exmpl_string[0].content, "Please choose your example");
@@ -233,7 +235,6 @@ UINT32 ConfirmKey_Interrupt(VOID)
 	uvIntSave = LOS_IntLock();
 	
 	//Example_Exti0_Init();
-	Init_E53_SC1();
 	
 	LOS_HwiCreate(KEY2_EXTI_IRQn, 0, 0, Key2_IRQHandler, 0); //创建中断
 	
