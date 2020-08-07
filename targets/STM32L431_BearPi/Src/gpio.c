@@ -71,6 +71,16 @@ void MX_GPIO_Init(void)
 	 /*Configure GPIO pin Output Level */
 
 
+  /*Configure GPIO pin : PA0 */
+  GPIO_InitStruct.Pin = GPIO_PIN_2;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+  GPIO_InitStruct.Pull = GPIO_PULLUP; /* 根据原理图，按键接地，所以引脚电平上拉 */
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+ 
+  // /* EXTI interrupt init*/
+  // HAL_NVIC_SetPriority(EXTI2_IRQn, 2, 0);
+  // HAL_NVIC_EnableIRQ(EXTI2_IRQn);
+
 
 	
 	 /*Configure GPIO pin : PtPin */

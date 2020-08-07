@@ -21,8 +21,8 @@
 #define LCD_Buf_Size 1152
 static uint8_t lcd_buf[LCD_Buf_Size];
 
-uint16_t	POINT_COLOR = BLACK;	//画笔颜色	默认为黑色
-uint16_t	BACK_COLOR 	= WHITE;	//背景颜色	默认为白色
+uint16_t	POINT_COLOR = DARKBLUE;	//画笔颜色	默认为黑色
+uint16_t	BACK_COLOR 	= BLACK;	//背景颜色	默认为白色
 
 
 /**
@@ -786,7 +786,7 @@ void LCD_Init(void)
 
     LCD_Address_Set(0, 0, LCD_Width - 1, LCD_Height - 1);
 
-    LCD_Clear(WHITE);
+    LCD_Clear(BLACK);
 
     /* Display on */
     LCD_PWR(1);
