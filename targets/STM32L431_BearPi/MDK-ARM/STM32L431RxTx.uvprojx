@@ -762,6 +762,11 @@
               <FileType>1</FileType>
               <FilePath>..\Hardware\Src\hal_qspi_flash.c</FilePath>
             </File>
+            <File>
+              <FileName>E53_IA1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\E53_SC1\E53_IA1.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2334,6 +2339,11 @@
               <FileType>1</FileType>
               <FilePath>..\Hardware\Src\hal_qspi_flash.c</FilePath>
             </File>
+            <File>
+              <FileName>E53_IA1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\E53_SC1\E53_IA1.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -3836,6 +3846,11 @@
               <FileName>hal_qspi_flash.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Hardware\Src\hal_qspi_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>E53_IA1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\E53_SC1\E53_IA1.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -5408,6 +5423,11 @@
               <FileName>hal_qspi_flash.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Hardware\Src\hal_qspi_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>E53_IA1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\E53_SC1\E53_IA1.c</FilePath>
             </File>
           </Files>
         </Group>

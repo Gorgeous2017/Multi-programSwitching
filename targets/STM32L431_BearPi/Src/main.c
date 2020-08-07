@@ -44,6 +44,7 @@
 char s_resp_buf[14] = {0};
 uint32_t reply_sem;
 E53_SC1_Data_TypeDef E53_SC1_Data;
+E53_IA1_Data_TypeDef E53_IA1_Data;
 
 VOID HardWare_Init(VOID)
 {
@@ -54,8 +55,8 @@ VOID HardWare_Init(VOID)
 	MX_USART1_UART_Init();
 	dwt_delay_init(SystemCoreClock);
 	LCD_Init();					
-	LCD_Clear(LCD_BACK_COLOR);		   	
-	POINT_COLOR = LCD_POINT_COLOR;			
+	LCD_Clear(LCD_BACK_COLOR);
+	POINT_COLOR = LCD_POINT_COLOR;
 	//LCD_ShowString(5, 5, 240, 16, 16, "Please choose your example");
 	//LCD_ShowString(20, 90, 240, 16, 16, "BearPi IoT Develop Board");
 	//LCD_ShowString(20, 130, 240, 16, 16, "Powerd by Huawei LiteOS!");
@@ -82,7 +83,8 @@ int main(void)
         return LOS_NOK;
     }
 
-    ChoiceKey_Interrupt();
+    SelectKey_Interrupt();
+    ConfirmKey_Interrupt();
 
     (void)LOS_Start();
     return 0;
