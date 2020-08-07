@@ -85,6 +85,13 @@ void UI_MsgInit(void)
 	exmpl_string[3].start_y = 100;
 	exmpl_string[4].start_y = 120;
 
+	extern UINT32 creat_collection_task();
+	extern UINT32 creat_ia1_collection_task();
+
+	exmpl_string[1].creat_task = creat_collection_task;
+	exmpl_string[2].creat_task = creat_ia1_collection_task;
+
+
 	strcpy(exmpl_string[0].content, "Please choose your example");
 	strcpy(exmpl_string[1].content, "E53_SC1");
 	strcpy(exmpl_string[2].content, "E53_IA1");
@@ -164,10 +171,14 @@ static VOID Key1_IRQHandler(void)
 {
 	printf("\r\n Key1 IRQ test\r\n");
 
-	//LCD_ShowString(20, 90, 240, 16, 16, " ChoiceKey_Interrupt ");
+	//LCD_ShowString(20, 90, 240, 16, 16, " SelectKey_Interrupt ");
 
 	/* 选择指向下标自增 */
 	lp.current_index++;
+	if(lp.current_index > lp.module_num)
+	{
+		lp.current_index = 1;
+	}
 
 	UI_RefreshChooseItem(taget_string, lp);
 
@@ -181,7 +192,30 @@ static VOID Key1_IRQHandler(void)
 
 }
 
-UINT32 ChoiceKey_Interrupt(VOID)
+extern E53_SC1_Data_TypeDef E53_SC1_Data;
+
+static VOID Key2_IRQHandler(void)
+{
+
+	printf("\r\n Key2 IRQ test\r\n");
+
+	// E53_SC1_Read_Data();
+
+	// LCD_ShowString(70, 100, 200, 16, 16, "Lux Value is:");
+
+	// printf("\r\n %d \r\n",(int)E53_SC1_Data.Lux);
+
+	// LCD_ShowNum(180, 100, (int)E53_SC1_Data.Lux, 5, 24);
+
+	exmpl_string[lp.current_index].creat_task();
+
+	__HAL_GPIO_EXTI_CLEAR_FLAG(GPIO_PIN_3);
+
+	return;
+
+}
+
+UINT32 SelectKey_Interrupt(VOID)
 {
 	UINTPTR uvIntSave;
 	uvIntSave = LOS_IntLock();
@@ -189,6 +223,20 @@ UINT32 ChoiceKey_Interrupt(VOID)
 	//Example_Exti0_Init();
 	
 	LOS_HwiCreate(KEY1_EXTI_IRQn, 0, 0, Key1_IRQHandler, 0); //创建中断
+	
+	LOS_IntRestore(uvIntSave);
+	
+	return LOS_OK;
+}
+
+UINT32 ConfirmKey_Interrupt(VOID)
+{
+	UINTPTR uvIntSave;
+	uvIntSave = LOS_IntLock();
+	
+	//Example_Exti0_Init();
+	
+	LOS_HwiCreate(KEY2_EXTI_IRQn, 0, 0, Key2_IRQHandler, 0); //创建中断
 	
 	LOS_IntRestore(uvIntSave);
 	

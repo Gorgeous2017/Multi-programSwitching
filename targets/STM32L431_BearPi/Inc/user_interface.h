@@ -18,6 +18,8 @@
 #include "stm32l4xx.h"
 #include "stm32l4xx_hal.h"
 #include "lcd.h"
+#include "E53_SC1.h"
+#include "E53_IA1.h"
 
 
 /* Exported typedef -----------------------------------------------------------*/
@@ -53,6 +55,8 @@ typedef struct {
 	uint16_t start_x; /*!< 字符串起始横坐标 */
 	uint16_t start_y; /*!< 字符串起始纵坐标 */
 
+	UINT32 (*creat_task)(void);
+
 	char content[40]; /*!< 该行需要显示的字符串 */
 
 } LCD_String_TypeDef;
@@ -85,7 +89,6 @@ typedef struct {
 #define LCD_HIHTLIGHT_BACK_COLOR	WHITE
 
 
-
 #define KEY1_EXTI_IRQn EXTI2_IRQn
 #define KEY2_EXTI_IRQn EXTI3_IRQn
 
@@ -93,7 +96,7 @@ typedef struct {
 
 /* Exported function -----------------------------------------------*/
 
-UINT32 ChoiceKey_Interrupt(VOID);
+UINT32 SelectKey_Interrupt(VOID);
 UINT32 creat_it_test_task();
 void UI_DisplayAllMsg(void);
 
