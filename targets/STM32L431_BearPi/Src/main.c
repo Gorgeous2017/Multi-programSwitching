@@ -54,12 +54,12 @@ VOID HardWare_Init(VOID)
 	MX_USART1_UART_Init();
 	dwt_delay_init(SystemCoreClock);
 	LCD_Init();					
-	LCD_Clear(WHITE);		   	
-	POINT_COLOR = RED;			
+	LCD_Clear(LCD_BACK_COLOR);		   	
+	POINT_COLOR = LCD_POINT_COLOR;			
 	//LCD_ShowString(5, 5, 240, 16, 16, "Please choose your example");
 	//LCD_ShowString(20, 90, 240, 16, 16, "BearPi IoT Develop Board");
 	//LCD_ShowString(20, 130, 240, 16, 16, "Powerd by Huawei LiteOS!");
-	LCD_ShowString(10, 170, 240, 16, 16, "Please wait for system init");
+	//LCD_ShowString(10, 170, 240, 16, 16, "Please wait for system init");
 
     //printf("EXAMPLE_NUM = %d, COMM_NUM = %d \n",EXAMPLE_NUM, COMM_NUM);
     UI_DisplayAllMsg();

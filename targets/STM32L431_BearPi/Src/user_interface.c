@@ -49,9 +49,9 @@
 
 // 	uint8_t result;
 
-// 	if(lc.current_choose >= lc.model_num)
+// 	if(lc.current_choose >= lc.module_num)
 // 	{
-// 		lc.current_choose -= lc.model_num
+// 		lc.current_choose -= lc.module_num
 // 	}
 
 
@@ -70,15 +70,29 @@
 LCD_String_TypeDef exmpl_string[EXMPL_NUM + 1];
 LCD_String_TypeDef comm_string[COMM_NUM + 1];
 
+UI_LoopChoose_TypeDef lp = {
+	.current_index = 0,
+	.module_num = EXMPL_NUM
+};
+
+
 void UI_MsgInit(void) 
 {
+	exmpl_string[0].start_y = 40;
+
+	exmpl_string[1].start_y = 60;
+	exmpl_string[2].start_y = 80;
+	exmpl_string[3].start_y = 100;
+	exmpl_string[4].start_y = 120;
+
 	strcpy(exmpl_string[0].content, "Please choose your example");
 	strcpy(exmpl_string[1].content, "E53_SC1");
 	strcpy(exmpl_string[2].content, "E53_IA1");
 	strcpy(exmpl_string[3].content, "E53_ST1");
 	strcpy(exmpl_string[4].content, "E53_SF1");
 
-	strcpy(comm_string[0].content, "Please choose communicate method");
+	comm_string[0].start_y = 150;
+	strcpy(comm_string[0].content, "Choose communicate module");
 	strcpy(comm_string[1].content, "Wi-Fi");
 	strcpy(comm_string[2].content, "NB");
 	strcpy(comm_string[3].content, "2G");
@@ -88,14 +102,18 @@ void UI_MsgInit(void)
 
 LCD_String_TypeDef *taget_string = exmpl_string;
 
-void UI_DisplayModelMsg(LCD_String_TypeDef *taget_string, uint8_t model_num)
+void UI_DisplayModuleMsg(LCD_String_TypeDef *taget_string, uint8_t module_num)
 {
 	uint8_t i;
 
-	for(i = 0; i < model_num; i++)
+	for(i = 0; i < module_num; i++)
 	{
-		LCD_ShowString(5, 40 + i * (LCD_FRONT_SIZE+4), LCD_WIDTH, LCD_HEIGHT, LCD_FRONT_SIZE, taget_string[i].content);
-
+		LCD_ShowString(5, 
+						taget_string[0].start_y + i * LCD_HEIGHT/*(LCD_FRONT_SIZE+4)*/,
+						LCD_WIDTH, 
+						LCD_HEIGHT, 
+						LCD_FRONT_SIZE, 
+						taget_string[i].content);
 	}
 
 
@@ -107,22 +125,54 @@ void UI_DisplayAllMsg(void)
 {
 	UI_MsgInit();
 
-	LCD_ShowString(0, 0, LCD_WIDTH, LCD_HEIGHT, LCD_FRONT_SIZE, "Press F1 to select");
-	LCD_ShowString(0, 16, LCD_WIDTH, LCD_HEIGHT, LCD_FRONT_SIZE, "Press F2 to confirm");
+	LCD_ShowString(10, 0, LCD_WIDTH, LCD_HEIGHT, LCD_FRONT_SIZE, "Press F1 to select");
+	LCD_ShowString(10, 16, LCD_WIDTH, LCD_HEIGHT, LCD_FRONT_SIZE, "Press F2 to confirm");
 
-	UI_DisplayModelMsg(exmpl_string, EXMPL_NUM + 1);
+	UI_DisplayModuleMsg(exmpl_string, EXMPL_NUM + 1);
 
+	UI_DisplayModuleMsg(comm_string, COMM_NUM + 1);
 
 
 }
+
+void UI_RefreshChooseItem(LCD_String_TypeDef *taget_string, UI_LoopChoose_TypeDef lp) 
+{
+	/* 重新显示一遍信息，覆盖掉上次高亮的区域 */
+	UI_DisplayModuleMsg(taget_string, lp.module_num + 1);
+
+
+	/* 高亮目标 */
+	POINT_COLOR = LCD_HIHTLIGHT_POINT_COLOR;
+	BACK_COLOR = LCD_HIHTLIGHT_BACK_COLOR;
+
+	LCD_ShowString(	5, 
+					taget_string[lp.current_index].start_y,
+					LCD_WIDTH, 
+					LCD_HEIGHT, 
+					LCD_FRONT_SIZE, 
+					taget_string[lp.current_index].content);
+
+	POINT_COLOR = LCD_POINT_COLOR;
+	BACK_COLOR = LCD_BACK_COLOR;
+
+
+}
+
+
 
 static VOID Key1_IRQHandler(void)
 {
 	printf("\r\n Key1 IRQ test\r\n");
 
-	LCD_ShowString(20, 90, 240, 16, 16, " ChoiceKey_Interrupt ");
+	//LCD_ShowString(20, 90, 240, 16, 16, " ChoiceKey_Interrupt ");
 
-	creat_it_test_task();
+	/* 选择指向下标自增 */
+	lp.current_index++;
+
+	UI_RefreshChooseItem(taget_string, lp);
+
+
+	//creat_it_test_task();
 
 
 	__HAL_GPIO_EXTI_CLEAR_FLAG(GPIO_PIN_2);

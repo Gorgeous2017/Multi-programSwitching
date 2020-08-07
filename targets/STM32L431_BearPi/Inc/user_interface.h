@@ -50,23 +50,25 @@ typedef enum {
 typedef struct {
 
 	/* 迭代时增加必要的成员，如字符串的起始坐标、字体大小等 */
-	
-	char content[40]; /*!< 该行需要显示的内容 */
+	uint16_t start_x; /*!< 字符串起始横坐标 */
+	uint16_t start_y; /*!< 字符串起始纵坐标 */
+
+	char content[40]; /*!< 该行需要显示的字符串 */
 
 } LCD_String_TypeDef;
 
 typedef struct {
 
-	uint8_t current_choose; /*!< 当前所选模块对应的下标 */
-	uint8_t model_num; /*!< 循环选择的模块数目 */
+	uint8_t current_index;	/*!< 当前所选模块对应的下标 */
+	uint8_t module_num;		/*!< 循环选择的模块数目 */
 
 } UI_LoopChoose_TypeDef;
 
 
 
 /* Exported constants --------------------------------------------------------*/
-#define EXMPL_NUM 4 /*!< Bearpi_Example 枚举体中的案例数目 */
-#define COMM_NUM 3 /*!< Bearpi_Communicate 枚举体中的通讯方式数目 */
+#define EXMPL_NUM 4	/*!< Bearpi_Example 枚举体中的案例数目 */
+#define COMM_NUM 3	/*!< Bearpi_Communicate 枚举体中的通讯方式数目 */
 #define TIPS_NUM 2
 
 //#define LCD_LINE_NUM (EXAMPLE_NUM + COMM_NUM + TIPS_NUM )
@@ -74,8 +76,14 @@ typedef struct {
 #define LCD_START_X     0
 #define LCD_START_Y     0
 #define LCD_WIDTH       240
-#define LCD_HEIGHT      16
+#define LCD_HEIGHT      20
 #define LCD_FRONT_SIZE  16
+
+#define LCD_POINT_COLOR 			LIGHTBLUE
+#define LCD_BACK_COLOR				BLACK
+#define LCD_HIHTLIGHT_POINT_COLOR	DARKBLUE
+#define LCD_HIHTLIGHT_BACK_COLOR	WHITE
+
 
 
 #define KEY1_EXTI_IRQn EXTI2_IRQn
