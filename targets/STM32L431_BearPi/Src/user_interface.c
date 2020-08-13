@@ -32,7 +32,19 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+LCD_String_TypeDef exmpl_string[EXMPL_NUM + 1];
+LCD_String_TypeDef comm_string[COMM_NUM + 1];
+LCD_String_TypeDef *taget_string = exmpl_string;
+
+UI_LoopChoose_TypeDef lp = {
+	.current_index = 0,
+	.module_num = EXMPL_NUM
+};
+
 /* Private function prototypes -----------------------------------------------*/
+extern UINT32 creat_collection_task();
+extern UINT32 creat_ia1_collection_task();
+
 /* Private functions ---------------------------------------------------------*/
 
 
@@ -67,15 +79,12 @@
 
 // }
 
-LCD_String_TypeDef exmpl_string[EXMPL_NUM + 1];
-LCD_String_TypeDef comm_string[COMM_NUM + 1];
-
-UI_LoopChoose_TypeDef lp = {
-	.current_index = 0,
-	.module_num = EXMPL_NUM
-};
 
 
+/**
+ * @brief 初始化各个字符串的参数
+ * 
+ */
 void UI_MsgInit(void) 
 {
 	exmpl_string[0].start_y = 40;
@@ -85,12 +94,8 @@ void UI_MsgInit(void)
 	exmpl_string[3].start_y = 100;
 	exmpl_string[4].start_y = 120;
 
-	extern UINT32 creat_collection_task();
-	extern UINT32 creat_ia1_collection_task();
-
 	exmpl_string[1].creat_task = creat_collection_task;
 	exmpl_string[2].creat_task = creat_ia1_collection_task;
-
 
 	strcpy(exmpl_string[0].content, "Please choose your example");
 	strcpy(exmpl_string[1].content, "E53_SC1");
@@ -106,9 +111,12 @@ void UI_MsgInit(void)
 
 }
 
-
-LCD_String_TypeDef *taget_string = exmpl_string;
-
+/**
+ * @brief 显示一个模块的信息
+ * 
+ * @param[in] taget_string 存储模块信息的数组
+ * @param[in] module_num 该模块数组内所含模块的数量
+ */
 void UI_DisplayModuleMsg(LCD_String_TypeDef *taget_string, uint8_t module_num)
 {
 	uint8_t i;
@@ -126,29 +134,40 @@ void UI_DisplayModuleMsg(LCD_String_TypeDef *taget_string, uint8_t module_num)
 
 }
 
-
-
+/**
+ * @brief 显示程序选择UI的所有信息
+ * 
+ */
 void UI_DisplayAllMsg(void) 
 {
+	/* 初始化字符串参数 */
 	UI_MsgInit();
 
+	/* 显示按键功能的提示信息 */
 	LCD_ShowString(10, 0, LCD_WIDTH, LCD_HEIGHT, LCD_FRONT_SIZE, "Press F1 to select");
 	LCD_ShowString(10, 16, LCD_WIDTH, LCD_HEIGHT, LCD_FRONT_SIZE, "Press F2 to confirm");
 
+	/* 显示小熊派案例选择信息 */
 	UI_DisplayModuleMsg(exmpl_string, EXMPL_NUM + 1);
 
+	/* 显示小熊派通讯模块选择信息 */
 	UI_DisplayModuleMsg(comm_string, COMM_NUM + 1);
-
 
 }
 
-void UI_RefreshChooseItem(LCD_String_TypeDef *taget_string, UI_LoopChoose_TypeDef lp) 
+/**
+ * @brief 高亮显示用户当前所选模块
+ * 
+ * @param taget_string 用户当前所处的选择模块
+ * @param lp 程序选择结构体
+ */
+void UI_HighlightChooseItem(LCD_String_TypeDef *taget_string, UI_LoopChoose_TypeDef lp) 
 {
 	/* 重新显示一遍信息，覆盖掉上次高亮的区域 */
 	UI_DisplayModuleMsg(taget_string, lp.module_num + 1);
 
-
-	/* 高亮目标 */
+	/* 高亮所选目标 */
+	/* 设置高亮字符颜色 */
 	POINT_COLOR = LCD_HIHTLIGHT_POINT_COLOR;
 	BACK_COLOR = LCD_HIHTLIGHT_BACK_COLOR;
 
@@ -159,19 +178,21 @@ void UI_RefreshChooseItem(LCD_String_TypeDef *taget_string, UI_LoopChoose_TypeDe
 					LCD_FRONT_SIZE, 
 					taget_string[lp.current_index].content);
 
+	/* 还原默认字符颜色 */
 	POINT_COLOR = LCD_POINT_COLOR;
 	BACK_COLOR = LCD_BACK_COLOR;
 
-
 }
 
-
-
+/**
+ * @brief 按键一中断处理函数
+ * @details 循环选择模块
+ * 
+ * @return VOID 
+ */
 static VOID Key1_IRQHandler(void)
 {
 	printf("\r\n Key1 IRQ test\r\n");
-
-	//LCD_ShowString(20, 90, 240, 16, 16, " SelectKey_Interrupt ");
 
 	/* 选择指向下标自增 */
 	lp.current_index++;
@@ -180,47 +201,45 @@ static VOID Key1_IRQHandler(void)
 		lp.current_index = 1;
 	}
 
-	UI_RefreshChooseItem(taget_string, lp);
+	/* 高亮所选项 */
+	UI_HighlightChooseItem(taget_string, lp);
 
-
-	//creat_it_test_task();
-
-
+	/* 清除中断标志位 */
 	__HAL_GPIO_EXTI_CLEAR_FLAG(GPIO_PIN_2);
 
 	return;
 
 }
 
-extern E53_SC1_Data_TypeDef E53_SC1_Data;
-
+/**
+ * @brief 按键二中断处理函数
+ * @details 根据用户所选择的模块执行对应的任务
+ * 
+ * @return VOID 
+ */
 static VOID Key2_IRQHandler(void)
 {
-
 	printf("\r\n Key2 IRQ test\r\n");
 
-	// E53_SC1_Read_Data();
-
-	// LCD_ShowString(70, 100, 200, 16, 16, "Lux Value is:");
-
-	// printf("\r\n %d \r\n",(int)E53_SC1_Data.Lux);
-
-	// LCD_ShowNum(180, 100, (int)E53_SC1_Data.Lux, 5, 24);
-
+	/* 创建所选模块对应的任务 */
 	exmpl_string[lp.current_index].creat_task();
 
+	/* 清除中断标志位 */
 	__HAL_GPIO_EXTI_CLEAR_FLAG(GPIO_PIN_3);
 
 	return;
 
 }
 
+/**
+ * @brief 创建选择按键中断
+ * 
+ * @return UINT32 
+ */
 UINT32 SelectKey_Interrupt(VOID)
 {
 	UINTPTR uvIntSave;
 	uvIntSave = LOS_IntLock();
-	
-	//Example_Exti0_Init();
 	
 	LOS_HwiCreate(KEY1_EXTI_IRQn, 0, 0, Key1_IRQHandler, 0); //创建中断
 	
@@ -229,12 +248,15 @@ UINT32 SelectKey_Interrupt(VOID)
 	return LOS_OK;
 }
 
+/**
+ * @brief 创建确认按键中断
+ * 
+ * @return UINT32 
+ */
 UINT32 ConfirmKey_Interrupt(VOID)
 {
 	UINTPTR uvIntSave;
 	uvIntSave = LOS_IntLock();
-	
-	//Example_Exti0_Init();
 	
 	LOS_HwiCreate(KEY2_EXTI_IRQn, 0, 0, Key2_IRQHandler, 0); //创建中断
 	
@@ -243,35 +265,24 @@ UINT32 ConfirmKey_Interrupt(VOID)
 	return LOS_OK;
 }  
 
-VOID dynamic_tasks_it_create(VOID)
-{
-	UINT32 uwRet = LOS_OK;
-						
-	while (1)
-	{
+// UINT32 creat_it_test_task()
+// {
+// 	UINT32 uwRet = LOS_OK;
+// 	UINT32 TskHandle;
+// 	TSK_INIT_PARAM_S task_init_param;
 
-		LCD_ShowString(20, 130, 240, 16, 16, " dynamic task!!!!!!!");
+// 	task_init_param.usTaskPrio = 0;
+// 	task_init_param.pcName = "dynamic_tasks_it_create";
+// 	task_init_param.pfnTaskEntry = (TSK_ENTRY_FUNC)dynamic_tasks_it_create;
+// 	task_init_param.uwStackSize = 0x800;
 
-	}
-}
-UINT32 creat_it_test_task()
-{
-	UINT32 uwRet = LOS_OK;
-	UINT32 TskHandle;
-	TSK_INIT_PARAM_S task_init_param;
-
-	task_init_param.usTaskPrio = 0;
-	task_init_param.pcName = "dynamic_tasks_it_create";
-	task_init_param.pfnTaskEntry = (TSK_ENTRY_FUNC)dynamic_tasks_it_create;
-	task_init_param.uwStackSize = 0x800;
-
-	uwRet = LOS_TaskCreate(&TskHandle, &task_init_param);
-	if(LOS_OK != uwRet)
-	{
-		return uwRet;
-	}
-	return uwRet;
-}
+// 	uwRet = LOS_TaskCreate(&TskHandle, &task_init_param);
+// 	if(LOS_OK != uwRet)
+// 	{
+// 		return uwRet;
+// 	}
+// 	return uwRet;
+// }
 
 
 /********************************** END OF FILE *******************************/

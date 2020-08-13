@@ -61,6 +61,10 @@ typedef struct {
 
 } LCD_String_TypeDef;
 
+/**
+ * @brief 程序选择控制结构体
+ * 
+ */
 typedef struct {
 
 	uint8_t current_index;	/*!< 当前所选模块对应的下标 */
@@ -97,7 +101,7 @@ typedef struct {
 /* Exported function -----------------------------------------------*/
 
 UINT32 SelectKey_Interrupt(VOID);
-UINT32 creat_it_test_task();
+//UINT32 creat_it_test_task();
 void UI_DisplayAllMsg(void);
 
 #endif /* __USER_INTERFACE_H__ */ 
