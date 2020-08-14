@@ -77,7 +77,7 @@ typedef struct {
 /* Exported constants --------------------------------------------------------*/
 #define EXMPL_NUM 4	/*!< Bearpi_Example 枚举体中的案例数目 */
 #define COMM_NUM 3	/*!< Bearpi_Communicate 枚举体中的通讯方式数目 */
-#define TIPS_NUM 2
+#define TIPS_NUM 2 /* 按键提示提示信息行数 */
 
 //#define LCD_LINE_NUM (EXAMPLE_NUM + COMM_NUM + TIPS_NUM )
 

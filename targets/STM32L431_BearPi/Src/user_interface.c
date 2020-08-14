@@ -47,7 +47,6 @@ extern UINT32 creat_ia1_collection_task();
 
 /* Private functions ---------------------------------------------------------*/
 
-
 // void UI_DisplayExmpl(uint8_t curr_choice) {
 	/* 场景区块和通讯区块仅循环计数的最大数目不同 */
 // }
@@ -66,7 +65,6 @@ extern UINT32 creat_ia1_collection_task();
 // 		lc.current_choose -= lc.module_num
 // 	}
 
-
 // 	return result;
 
 // }
@@ -78,8 +76,6 @@ extern UINT32 creat_ia1_collection_task();
 //     return;
 
 // }
-
-
 
 /**
  * @brief 初始化各个字符串的参数
@@ -130,7 +126,6 @@ void UI_DisplayModuleMsg(LCD_String_TypeDef *taget_string, uint8_t module_num)
 						LCD_FRONT_SIZE, 
 						taget_string[i].content);
 	}
-
 
 }
 
@@ -241,7 +236,8 @@ UINT32 SelectKey_Interrupt(VOID)
 	UINTPTR uvIntSave;
 	uvIntSave = LOS_IntLock();
 	
-	LOS_HwiCreate(KEY1_EXTI_IRQn, 0, 0, Key1_IRQHandler, 0); //创建中断
+	/* 创建中断 */
+	LOS_HwiCreate(KEY1_EXTI_IRQn, 0, 0, Key1_IRQHandler, 0); 
 	
 	LOS_IntRestore(uvIntSave);
 	
@@ -258,7 +254,8 @@ UINT32 ConfirmKey_Interrupt(VOID)
 	UINTPTR uvIntSave;
 	uvIntSave = LOS_IntLock();
 	
-	LOS_HwiCreate(KEY2_EXTI_IRQn, 0, 0, Key2_IRQHandler, 0); //创建中断
+	/* 创建中断 */
+	LOS_HwiCreate(KEY2_EXTI_IRQn, 0, 0, Key2_IRQHandler, 0);
 	
 	LOS_IntRestore(uvIntSave);
 	
