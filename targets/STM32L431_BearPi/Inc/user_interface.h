@@ -59,7 +59,7 @@ typedef struct {
 
 	char content[40]; /*!< 该行需要显示的字符串 */
 
-} LCD_String_TypeDef;
+} MODULE_CB_S;
 
 /**
  * @brief 程序选择控制结构体
@@ -67,10 +67,11 @@ typedef struct {
  */
 typedef struct {
 
-	uint8_t current_index;	/*!< 当前所选模块对应的下标 */
 	uint8_t module_num;		/*!< 循环选择的模块数目 */
+	MODULE_CB_S *module_select_area;
+	void (*schedue_func)(void);
 
-} UI_LoopChoose_TypeDef;
+} UI_SCHEDUE_S;
 
 
 

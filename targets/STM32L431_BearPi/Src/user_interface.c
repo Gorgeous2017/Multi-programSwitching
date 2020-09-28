@@ -32,14 +32,23 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-LCD_String_TypeDef exmpl_string[EXMPL_NUM + 1]; /*!< 小熊派物联网案例选择区域 */
-LCD_String_TypeDef comm_string[COMM_NUM + 1]; /*!< 小熊派通讯模块选择区域 */
-LCD_String_TypeDef *taget_string = exmpl_string; /*!< 当前所处的选择区域 */
+MODULE_CB_S exmpl_select_area[EXMPL_NUM + 1]; /*!< 小熊派物联网案例选择区域 */
+MODULE_CB_S comm_select_area[COMM_NUM + 1]; /*!< 小熊派通讯模块选择区域 */
+MODULE_CB_S *taget_string = exmpl_select_area; /*!< 当前所处的选择区域 */
 
-UI_LoopChoose_TypeDef lp = {
-	.current_index = 0,
-	.module_num = EXMPL_NUM
+UI_SCHEDUE_S ui_schedue[2] = {
+	{
+		.module_num = EXMPL_NUM,
+		.module_select_area = exmpl_select_area
+	},
+	{
+		.module_num = COMM_NUM,
+		.module_select_area = comm_select_area
+	}
 }; /*!< 循环选择控制流 */
+
+volatile uint8_t current_index = 0;
+UI_SCHEDUE_S *curr_schedue = &(ui_schedue[0]);
 
 /* Private function prototypes -----------------------------------------------*/
 extern UINT32 creat_collection_task();
@@ -47,84 +56,54 @@ extern UINT32 creat_ia1_collection_task();
 
 /* Private functions ---------------------------------------------------------*/
 
-// void UI_DisplayExmpl(uint8_t curr_choice) {
-	/* 场景区块和通讯区块仅循环计数的最大数目不同 */
-// }
-
-// void UI_DisplayComm(uint8_t curr_choice) {
-
-// }
-
-// static uint8_t UI_FindAimIndex(UI_LoopChoose_TypeDef lc)
-// {
-
-// 	uint8_t result;
-
-// 	if(lc.current_choose >= lc.module_num)
-// 	{
-// 		lc.current_choose -= lc.module_num
-// 	}
-
-// 	return result;
-
-// }
-
-// static void Example_Exti0_Init()
-// {
-//     /*add your IRQ init code here*/
-
-//     return;
-
-// }
-
 /**
  * @brief 初始化各个字符串的参数
  * 
  */
 void UI_MsgInit(void) 
 {
-	exmpl_string[0].start_y = 40;
+	exmpl_select_area[0].start_y = 40;
 
-	exmpl_string[1].start_y = 60;
-	exmpl_string[2].start_y = 80;
-	exmpl_string[3].start_y = 100;
-	exmpl_string[4].start_y = 120;
+	exmpl_select_area[1].start_y = 60;
+	exmpl_select_area[2].start_y = 80;
+	exmpl_select_area[3].start_y = 100;
+	exmpl_select_area[4].start_y = 120;
 
-	exmpl_string[1].creat_task = creat_collection_task;
-	exmpl_string[2].creat_task = creat_ia1_collection_task;
+	exmpl_select_area[1].creat_task = creat_collection_task;
+	exmpl_select_area[2].creat_task = creat_ia1_collection_task;
 
-	strcpy(exmpl_string[0].content, "Please choose your example");
-	strcpy(exmpl_string[1].content, "E53_SC1");
-	strcpy(exmpl_string[2].content, "E53_IA1");
-	strcpy(exmpl_string[3].content, "E53_ST1");
-	strcpy(exmpl_string[4].content, "E53_SF1");
+	strcpy(exmpl_select_area[0].content, "Please choose your example");
+	strcpy(exmpl_select_area[1].content, "E53_SC1");
+	strcpy(exmpl_select_area[2].content, "E53_IA1");
+	strcpy(exmpl_select_area[3].content, "E53_ST1");
+	strcpy(exmpl_select_area[4].content, "E53_SF1");
 
-	comm_string[0].start_y = 150;
-	strcpy(comm_string[0].content, "Choose communicate module");
-	strcpy(comm_string[1].content, "Wi-Fi");
-	strcpy(comm_string[2].content, "NB");
-	strcpy(comm_string[3].content, "2G");
+	comm_select_area[0].start_y = 150;
+	strcpy(comm_select_area[0].content, "Choose communicate module");
+	strcpy(comm_select_area[1].content, "Wi-Fi");
+	strcpy(comm_select_area[2].content, "NB");
+	strcpy(comm_select_area[3].content, "2G");
 
 }
 
 /**
  * @brief 显示一个模块的信息
  * 
- * @param[in] taget_string 存储模块信息的数组
+ * @param[in] taget_select_area 存储模块信息的数组
  * @param[in] module_num 该模块数组内所含模块的数量
  */
-void UI_DisplayModuleMsg(LCD_String_TypeDef *taget_string, uint8_t module_num)
+void UI_DisplayModuleMsg(MODULE_CB_S *taget_select_area, uint8_t module_num)
 {
 	uint8_t i;
 
 	for(i = 0; i < module_num; i++)
 	{
 		LCD_ShowString(5, 
-						taget_string[0].start_y + i * LCD_HEIGHT/*(LCD_FRONT_SIZE+4)*/,
+						taget_select_area[0].start_y + i * LCD_HEIGHT/*(LCD_FRONT_SIZE+4)*/,
 						LCD_WIDTH, 
 						LCD_HEIGHT, 
 						LCD_FRONT_SIZE, 
-						taget_string[i].content);
+						taget_select_area[i].content);
 	}
 
 }
@@ -143,23 +122,23 @@ void UI_DisplayAllMsg(void)
 	LCD_ShowString(10, 16, LCD_WIDTH, LCD_HEIGHT, LCD_FRONT_SIZE, "Press F2 to confirm");
 
 	/* 显示小熊派案例选择信息 */
-	UI_DisplayModuleMsg(exmpl_string, EXMPL_NUM + 1);
+	UI_DisplayModuleMsg(ui_schedue[0].module_select_area, ui_schedue[0].module_num + 1);
 
 	/* 显示小熊派通讯模块选择信息 */
-	UI_DisplayModuleMsg(comm_string, COMM_NUM + 1);
+	UI_DisplayModuleMsg(ui_schedue[1].module_select_area, ui_schedue[0].module_num + 1);
 
 }
 
 /**
  * @brief 高亮显示用户当前所选模块
  * 
- * @param taget_string 用户当前所处的选择模块
- * @param lp 程序选择结构体
+ * @param taget_select_area 用户当前所处的选择模块
+ * @param module_num 程序选择结构体
  */
-void UI_HighlightChooseItem(LCD_String_TypeDef *taget_string, UI_LoopChoose_TypeDef lp) 
+void UI_HighlightChooseItem(MODULE_CB_S *taget_select_area, uint8_t module_num) 
 {
 	/* 重新显示一遍信息，覆盖掉上次高亮的区域 */
-	UI_DisplayModuleMsg(taget_string, lp.module_num + 1);
+	UI_DisplayModuleMsg(taget_select_area, module_num + 1);
 
 	/* 高亮所选目标 */
 	/* 设置高亮字符颜色 */
@@ -167,11 +146,11 @@ void UI_HighlightChooseItem(LCD_String_TypeDef *taget_string, UI_LoopChoose_Type
 	BACK_COLOR = LCD_HIHTLIGHT_BACK_COLOR;
 
 	LCD_ShowString(	5, 
-					taget_string[lp.current_index].start_y,
+					taget_select_area[current_index].start_y,
 					LCD_WIDTH, 
 					LCD_HEIGHT, 
 					LCD_FRONT_SIZE, 
-					taget_string[lp.current_index].content);
+					taget_select_area[current_index].content);
 
 	/* 还原默认字符颜色 */
 	POINT_COLOR = LCD_POINT_COLOR;
@@ -190,14 +169,14 @@ static VOID Key1_IRQHandler(void)
 	printf("\r\n Key1 IRQ test\r\n");
 
 	/* 选择指向下标自增 */
-	lp.current_index++;
-	if(lp.current_index > lp.module_num)
+	current_index++;
+	if(current_index > curr_schedue->module_num)
 	{
-		lp.current_index = 1;
+		current_index = 1;
 	}
 
 	/* 高亮所选项 */
-	UI_HighlightChooseItem(taget_string, lp);
+	UI_HighlightChooseItem(curr_schedue->module_select_area, curr_schedue->module_num);
 
 	/* 清除中断标志位 */
 	__HAL_GPIO_EXTI_CLEAR_FLAG(GPIO_PIN_2);
@@ -217,7 +196,7 @@ static VOID Key2_IRQHandler(void)
 	printf("\r\n Key2 IRQ test\r\n");
 
 	/* 创建所选模块对应的任务 */
-	exmpl_string[lp.current_index].creat_task();
+	curr_schedue->module_select_area[current_index].creat_task();
 
 	/* 清除中断标志位 */
 	__HAL_GPIO_EXTI_CLEAR_FLAG(GPIO_PIN_3);
