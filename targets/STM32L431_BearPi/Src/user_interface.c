@@ -11,16 +11,16 @@
  * 1. 将需要显示的LCD信息按功能进行划分
  * 2. 初始化LCD各行的字符串信息
  * 3. 编写交互逻辑，即按键中断响应
- *     3.1. 模块选择交互
- *         - 成员下标自增以及循环计数
- *         - 刷新先前的选择
- *         - 高亮当前选择
- *     3.2. 模块确认交互
- *         - 重新赋值模块数目
+ * 3.1. 模块选择交互
+ * 	- 成员下标自增以及循环计数
+ * 	- 刷新先前的选择
+ * 	- 高亮当前选择
+ * 3.2. 模块确认交互
+ * 	- 重新赋值模块数目
  * 4. 屏蔽按键中断
- *     - 用户应用程序可重新实现中断响应函数
+ * 	- 用户应用程序可重新实现中断响应函数
  * 5. 执行用户选择的任务
- *     5.1. 赋值函数指针
+ * 5.1. 赋值函数指针
  * 
  * ******************************************************************************
  */
@@ -32,14 +32,14 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-LCD_String_TypeDef exmpl_string[EXMPL_NUM + 1];
-LCD_String_TypeDef comm_string[COMM_NUM + 1];
-LCD_String_TypeDef *taget_string = exmpl_string;
+LCD_String_TypeDef exmpl_string[EXMPL_NUM + 1]; /*!< 小熊派物联网案例选择区域 */
+LCD_String_TypeDef comm_string[COMM_NUM + 1]; /*!< 小熊派通讯模块选择区域 */
+LCD_String_TypeDef *taget_string = exmpl_string; /*!< 当前所处的选择区域 */
 
 UI_LoopChoose_TypeDef lp = {
 	.current_index = 0,
 	.module_num = EXMPL_NUM
-};
+}; /*!< 循环选择控制流 */
 
 /* Private function prototypes -----------------------------------------------*/
 extern UINT32 creat_collection_task();
