@@ -32,23 +32,21 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-MODULE_CB_S exmpl_select_area[EXMPL_NUM + 1]; /*!< 小熊派物联网案例选择区域 */
-MODULE_CB_S comm_select_area[COMM_NUM + 1]; /*!< 小熊派通讯模块选择区域 */
-MODULE_CB_S *taget_string = exmpl_select_area; /*!< 当前所处的选择区域 */
 
 UI_SCHEDUE_S ui_schedue[2] = {
 	{
 		.module_num = EXMPL_NUM,
-		.module_select_area = exmpl_select_area
+		.schedue_func = UI_SwitchingModuleSelectArea
 	},
 	{
 		.module_num = COMM_NUM,
-		.module_select_area = comm_select_area
+		.schedue_func = UI_RunUserApp
 	}
 }; /*!< 循环选择控制流 */
 
 volatile uint8_t current_index = 0;
 UI_SCHEDUE_S *curr_schedue = &(ui_schedue[0]);
+UINT32 (*user_select_task)();
 
 /* Private function prototypes -----------------------------------------------*/
 extern UINT32 creat_collection_task();
@@ -56,12 +54,64 @@ extern UINT32 creat_ia1_collection_task();
 
 /* Private functions ---------------------------------------------------------*/
 
+void UI_SwitchingModuleSelectArea(void)
+{
+	printf("Function: UI_SwitchingModuleSelectArea in \n");
+
+	/* 检验下标是否合法 */
+	if(current_index == 0)
+	{
+		return;
+	}
+
+	user_select_task = curr_schedue->module_select_area[current_index].creat_task;
+
+	UI_DisplayModuleMsg(curr_schedue->module_select_area, curr_schedue->module_num + 1);
+
+	LCD_ShowString(	10 * LCD_FRONT_SIZE / 2, 
+				curr_schedue->module_select_area[current_index].start_y,
+				LCD_WIDTH, 
+				LCD_HEIGHT, 
+				LCD_FRONT_SIZE, 
+				"<<===");
+
+	/* 切换模块区域 */
+	curr_schedue = &(ui_schedue[1]);
+
+	/* 复位模块选择下标 */
+	current_index = 1;
+	UI_HighlightChooseItem(curr_schedue->module_select_area, curr_schedue->module_num);
+
+}
+
+void UI_RunUserApp(void)
+{
+	printf("Function: UI_RunUserApp in \n");
+
+	/* 通讯方式切换 */
+
+
+	/* 用户已经选择完成，清屏 */
+	LCD_Clear(LCD_BACK_COLOR);
+
+	/* 创建所选模块对应的任务 */
+	user_select_task();
+
+	/* 关闭按键中断 */
+	LOS_HwiDelete(KEY1_EXTI_IRQn);
+	LOS_HwiDelete(KEY2_EXTI_IRQn);
+
+}
+
 /**
  * @brief 初始化各个字符串的参数
  * 
  */
 void UI_MsgInit(void) 
 {
+	static MODULE_CB_S exmpl_select_area[EXMPL_NUM + 1]; /*!< 小熊派物联网案例选择区域 */
+	static MODULE_CB_S comm_select_area[COMM_NUM + 1]; /*!< 小熊派通讯模块选择区域 */
+
 	exmpl_select_area[0].start_y = 40;
 
 	exmpl_select_area[1].start_y = 60;
@@ -79,10 +129,17 @@ void UI_MsgInit(void)
 	strcpy(exmpl_select_area[4].content, "E53_SF1");
 
 	comm_select_area[0].start_y = 150;
+	comm_select_area[1].start_y = 170;
+	comm_select_area[2].start_y = 190;
+	comm_select_area[3].start_y = 210;
 	strcpy(comm_select_area[0].content, "Choose communicate module");
 	strcpy(comm_select_area[1].content, "Wi-Fi");
 	strcpy(comm_select_area[2].content, "NB");
 	strcpy(comm_select_area[3].content, "2G");
+
+	ui_schedue[0].module_select_area = exmpl_select_area;
+	ui_schedue[1].module_select_area = comm_select_area;
+
 
 }
 
@@ -99,7 +156,7 @@ void UI_DisplayModuleMsg(MODULE_CB_S *taget_select_area, uint8_t module_num)
 	for(i = 0; i < module_num; i++)
 	{
 		LCD_ShowString(5, 
-						taget_select_area[0].start_y + i * LCD_HEIGHT/*(LCD_FRONT_SIZE+4)*/,
+						taget_select_area[i].start_y,
 						LCD_WIDTH, 
 						LCD_HEIGHT, 
 						LCD_FRONT_SIZE, 
@@ -195,8 +252,8 @@ static VOID Key2_IRQHandler(void)
 {
 	printf("\r\n Key2 IRQ test\r\n");
 
-	/* 创建所选模块对应的任务 */
-	curr_schedue->module_select_area[current_index].creat_task();
+	/* 执行被选择模块的调度任务 */
+	curr_schedue->schedue_func();
 
 	/* 清除中断标志位 */
 	__HAL_GPIO_EXTI_CLEAR_FLAG(GPIO_PIN_3);

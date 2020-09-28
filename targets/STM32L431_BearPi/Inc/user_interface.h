@@ -105,5 +105,10 @@ UINT32 SelectKey_Interrupt(VOID);
 //UINT32 creat_it_test_task();
 void UI_DisplayAllMsg(void);
 
+void UI_SwitchingModuleSelectArea(void);
+void UI_RunUserApp(void);
+void UI_HighlightChooseItem(MODULE_CB_S *taget_select_area, uint8_t module_num);
+void UI_DisplayModuleMsg(MODULE_CB_S *taget_select_area, uint8_t module_num);
+
 #endif /* __USER_INTERFACE_H__ */ 
 /********************************** END OF FILE *******************************/
