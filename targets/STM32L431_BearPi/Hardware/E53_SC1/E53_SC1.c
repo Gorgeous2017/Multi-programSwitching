@@ -26,7 +26,7 @@ int result;
 * 参    数: 无
 * 返 回 值: 无
 ***************************************************************/
-void Init_BH1750(void)
+static void Init_BH1750(void)
 {
 	uint8_t t_Data = 0x01;
 	HAL_I2C_Master_Transmit(&hi2c1,BH1750_Addr,&t_Data,1,0xff);
@@ -38,13 +38,13 @@ void Init_BH1750(void)
 * 参    数: 无
 * 返 回 值: 无
 ***************************************************************/
-void Start_BH1750(void)
+static void Start_BH1750(void)
 {
 	uint8_t t_Data = 0x10;
 	HAL_I2C_Master_Transmit(&hi2c1,BH1750_Addr,&t_Data,1,0xff); 
 }
 
-void Init_Light(void)
+static void Init_Light(void)
 {
 
   GPIO_InitTypeDef GPIO_InitStruct;

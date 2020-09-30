@@ -18,8 +18,8 @@
 #include "stm32l4xx.h"
 #include "stm32l4xx_hal.h"
 #include "lcd.h"
-#include "E53_SC1.h"
-#include "E53_IA1.h"
+
+#include "app_bearpi.h"
 
 
 /* Exported typedef -----------------------------------------------------------*/
@@ -46,20 +46,20 @@ typedef enum {
 
 
 /**
- * @brief LCD屏幕显示结构体
+ * @brief 模块选择结构体
  * 
  */
 typedef struct {
 
 	/* 迭代时增加必要的成员，如字符串的起始坐标、字体大小等 */
-	uint16_t start_x; /*!< 字符串起始横坐标 */
-	uint16_t start_y; /*!< 字符串起始纵坐标 */
+	uint16_t start_x;				/*!< 字符串起始横坐标 */
+	uint16_t start_y;				/*!< 字符串起始纵坐标 */
 
-	UINT32 (*creat_task)(void);
+	UINT32 (*creat_task)(void);		/*!< 该模块的功能函数 */
 
-	char content[40]; /*!< 该行需要显示的字符串 */
+	char content[40]; 				/*!< 该行需要显示的字符串 */
 
-} LCD_String_TypeDef;
+} MODULE_CB_S;
 
 /**
  * @brief 程序选择控制结构体
@@ -67,10 +67,11 @@ typedef struct {
  */
 typedef struct {
 
-	uint8_t current_index;	/*!< 当前所选模块对应的下标 */
-	uint8_t module_num;		/*!< 循环选择的模块数目 */
+	uint8_t module_num;					/*!< 循环选择的模块数目 */
+	MODULE_CB_S *module_select_area;	/*!< 模块选择区域 */
+	void (*schedue_func)(void);			/*!< 调度函数 */
 
-} UI_LoopChoose_TypeDef;
+} UI_SCHEDUE_S;
 
 
 
@@ -103,6 +104,11 @@ typedef struct {
 UINT32 SelectKey_Interrupt(VOID);
 //UINT32 creat_it_test_task();
 void UI_DisplayAllMsg(void);
+
+void UI_SwitchingModuleSelectArea(void);
+void UI_RunUserApp(void);
+void UI_HighlightChooseItem(MODULE_CB_S *taget_select_area, uint8_t module_num);
+void UI_DisplayModuleMsg(MODULE_CB_S *taget_select_area, uint8_t module_num);
 
 #endif /* __USER_INTERFACE_H__ */ 
 /********************************** END OF FILE *******************************/

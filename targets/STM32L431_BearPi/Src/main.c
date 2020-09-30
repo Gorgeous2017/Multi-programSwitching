@@ -45,6 +45,8 @@ char s_resp_buf[14] = {0};
 uint32_t reply_sem;
 E53_SC1_Data_TypeDef E53_SC1_Data;
 E53_IA1_Data_TypeDef E53_IA1_Data;
+E53_SF1_Data_TypeDef E53_SF1_Data;
+E53_ST1_Data_TypeDef E53_ST1_Data;
 
 VOID HardWare_Init(VOID)
 {
@@ -53,6 +55,7 @@ VOID HardWare_Init(VOID)
 	SystemClock_Config();
 	MX_GPIO_Init();
 	MX_USART1_UART_Init();
+	MX_SPI2_Init();
 	dwt_delay_init(SystemCoreClock);
 	LCD_Init();					
 	LCD_Clear(LCD_BACK_COLOR);
