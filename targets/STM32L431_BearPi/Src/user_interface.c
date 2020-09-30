@@ -49,9 +49,6 @@ UI_SCHEDUE_S *curr_schedue = &(ui_schedue[0]);
 UINT32 (*user_select_task)();
 
 /* Private function prototypes -----------------------------------------------*/
-extern UINT32 creat_collection_task();
-extern UINT32 creat_ia1_collection_task();
-
 /* Private functions ---------------------------------------------------------*/
 
 void UI_SwitchingModuleSelectArea(void)
@@ -119,7 +116,7 @@ void UI_MsgInit(void)
 	exmpl_select_area[3].start_y = 100;
 	exmpl_select_area[4].start_y = 120;
 
-	exmpl_select_area[1].creat_task = creat_collection_task;
+	exmpl_select_area[1].creat_task = creat_sc1_collection_task;
 	exmpl_select_area[2].creat_task = creat_ia1_collection_task;
 
 	strcpy(exmpl_select_area[0].content, "Please choose your example");

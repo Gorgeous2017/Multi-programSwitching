@@ -53,6 +53,9 @@ static UINT32 g_atiny_tskHandle;
 
 void atiny_task_entry(void)
 {
+
+	printf("Function: atiny_task_entry in \n");
+
     extern void agent_tiny_entry();
 #if defined(WITH_LINUX) || defined(WITH_LWIP)
     hieth_hw_init();
@@ -88,6 +91,9 @@ void atiny_task_entry(void)
     at_api_register(&bc95_interface);
 
     #elif defined(USE_NB_NEUL95_NO_ATINY)
+
+	printf("Macro: USE_NB_NEUL95_NO_ATINY in \n");
+
     printf("\r\n=============nbiot_only USE_NB_NEUL95============================\n");
     demo_nbiot_only();
     #else
@@ -119,6 +125,9 @@ void atiny_task_entry(void)
 
 UINT32 creat_agenttiny_task(VOID)
 {
+
+	printf("Function: creat_agenttiny_task in \n");
+
     UINT32 uwRet = LOS_OK;
     TSK_INIT_PARAM_S task_init_param;
 
@@ -133,6 +142,9 @@ UINT32 creat_agenttiny_task(VOID)
 #endif
 
     uwRet = LOS_TaskCreate(&g_atiny_tskHandle, &task_init_param);
+
+	printf("Task: atiny_task_entry create down \n");
+
     if(LOS_OK != uwRet)
     {
         return uwRet;
@@ -192,14 +204,21 @@ UINT32 create_work_tasks(VOID)
 {
     UINT32 uwRet = LOS_OK;
 
+	printf("Function: create_work_tasks in \n");
+
     uwRet = creat_agenttiny_task();
     if (uwRet != LOS_OK)
     {
+    	printf("Function: creat_agenttiny_task down \n");
+
     	return LOS_NOK;
     }
 
 
 #if defined(USE_PPPOS)
+
+	printf("Macro: USE_PPPOS in \n");
+
     #include "osport.h"
     extern void uart_init(void);  //this uart used for the pppos interface
     uart_init();
@@ -209,6 +228,9 @@ UINT32 create_work_tasks(VOID)
 
 
 #if defined(WITH_DTLS) && defined(SUPPORT_DTLS_SRV)
+
+	printf("Macro: WITH_DTLS & SUPPORT_DTLS_SRV in \n");
+
     uwRet = create_dtls_server_task()
     if (uwRet != LOS_OK)
     {

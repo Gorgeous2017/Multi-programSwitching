@@ -462,6 +462,16 @@
               <FileType>1</FileType>
               <FilePath>..\Src\user_interface.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32l4xx_it.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\stm32l4xx_it.c</FilePath>
+            </File>
+            <File>
+              <FileName>app_bearpi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\app_bearpi.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -732,6 +742,36 @@
               <FileType>1</FileType>
               <FilePath>..\Drivers\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_qspi.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32l4xx_hal_tim.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l4xx_hal_tim_ex.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim_ex.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l4xx_hal_adc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_adc.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l4xx_hal_adc_ex.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_adc_ex.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l4xx_hal_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l4xx_hal_adc_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_adc_ex.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -766,6 +806,36 @@
               <FileName>E53_IA1.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Hardware\E53_SC1\E53_IA1.c</FilePath>
+            </File>
+            <File>
+              <FileName>E53_IA1.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Hardware\E53_SC1\E53_IA1.h</FilePath>
+            </File>
+            <File>
+              <FileName>E53_SC1.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Hardware\E53_SC1\E53_SC1.h</FilePath>
+            </File>
+            <File>
+              <FileName>E53_SF1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\E53_SC1\E53_SF1.c</FilePath>
+            </File>
+            <File>
+              <FileName>E53_SF1.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Hardware\E53_SC1\E53_SF1.h</FilePath>
+            </File>
+            <File>
+              <FileName>E53_ST1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\E53_SC1\E53_ST1.c</FilePath>
+            </File>
+            <File>
+              <FileName>E53_ST1.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Hardware\E53_SC1\E53_ST1.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -2039,6 +2109,16 @@
               <FileType>1</FileType>
               <FilePath>..\Src\user_interface.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32l4xx_it.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\stm32l4xx_it.c</FilePath>
+            </File>
+            <File>
+              <FileName>app_bearpi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\app_bearpi.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2309,6 +2389,36 @@
               <FileType>1</FileType>
               <FilePath>..\Drivers\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_qspi.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32l4xx_hal_tim.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l4xx_hal_tim_ex.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim_ex.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l4xx_hal_adc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_adc.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l4xx_hal_adc_ex.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_adc_ex.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l4xx_hal_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l4xx_hal_adc_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_adc_ex.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2343,6 +2453,36 @@
               <FileName>E53_IA1.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Hardware\E53_SC1\E53_IA1.c</FilePath>
+            </File>
+            <File>
+              <FileName>E53_IA1.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Hardware\E53_SC1\E53_IA1.h</FilePath>
+            </File>
+            <File>
+              <FileName>E53_SC1.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Hardware\E53_SC1\E53_SC1.h</FilePath>
+            </File>
+            <File>
+              <FileName>E53_SF1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\E53_SC1\E53_SF1.c</FilePath>
+            </File>
+            <File>
+              <FileName>E53_SF1.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Hardware\E53_SC1\E53_SF1.h</FilePath>
+            </File>
+            <File>
+              <FileName>E53_ST1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\E53_SC1\E53_ST1.c</FilePath>
+            </File>
+            <File>
+              <FileName>E53_ST1.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Hardware\E53_SC1\E53_ST1.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -3547,6 +3687,16 @@
               <FileType>1</FileType>
               <FilePath>..\Src\user_interface.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32l4xx_it.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\stm32l4xx_it.c</FilePath>
+            </File>
+            <File>
+              <FileName>app_bearpi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\app_bearpi.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -3817,6 +3967,36 @@
               <FileType>1</FileType>
               <FilePath>..\Drivers\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_qspi.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32l4xx_hal_tim.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l4xx_hal_tim_ex.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim_ex.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l4xx_hal_adc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_adc.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l4xx_hal_adc_ex.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_adc_ex.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l4xx_hal_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l4xx_hal_adc_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_adc_ex.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -3851,6 +4031,36 @@
               <FileName>E53_IA1.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Hardware\E53_SC1\E53_IA1.c</FilePath>
+            </File>
+            <File>
+              <FileName>E53_IA1.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Hardware\E53_SC1\E53_IA1.h</FilePath>
+            </File>
+            <File>
+              <FileName>E53_SC1.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Hardware\E53_SC1\E53_SC1.h</FilePath>
+            </File>
+            <File>
+              <FileName>E53_SF1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\E53_SC1\E53_SF1.c</FilePath>
+            </File>
+            <File>
+              <FileName>E53_SF1.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Hardware\E53_SC1\E53_SF1.h</FilePath>
+            </File>
+            <File>
+              <FileName>E53_ST1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\E53_SC1\E53_ST1.c</FilePath>
+            </File>
+            <File>
+              <FileName>E53_ST1.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Hardware\E53_SC1\E53_ST1.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -5124,6 +5334,16 @@
               <FileType>1</FileType>
               <FilePath>..\Src\user_interface.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32l4xx_it.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\stm32l4xx_it.c</FilePath>
+            </File>
+            <File>
+              <FileName>app_bearpi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\app_bearpi.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -5394,6 +5614,36 @@
               <FileType>1</FileType>
               <FilePath>..\Drivers\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_qspi.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32l4xx_hal_tim.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l4xx_hal_tim_ex.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim_ex.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l4xx_hal_adc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_adc.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l4xx_hal_adc_ex.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_adc_ex.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l4xx_hal_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l4xx_hal_adc_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_adc_ex.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -5428,6 +5678,36 @@
               <FileName>E53_IA1.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Hardware\E53_SC1\E53_IA1.c</FilePath>
+            </File>
+            <File>
+              <FileName>E53_IA1.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Hardware\E53_SC1\E53_IA1.h</FilePath>
+            </File>
+            <File>
+              <FileName>E53_SC1.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Hardware\E53_SC1\E53_SC1.h</FilePath>
+            </File>
+            <File>
+              <FileName>E53_SF1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\E53_SC1\E53_SF1.c</FilePath>
+            </File>
+            <File>
+              <FileName>E53_SF1.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Hardware\E53_SC1\E53_SF1.h</FilePath>
+            </File>
+            <File>
+              <FileName>E53_ST1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\E53_SC1\E53_ST1.c</FilePath>
+            </File>
+            <File>
+              <FileName>E53_ST1.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Hardware\E53_SC1\E53_ST1.h</FilePath>
             </File>
           </Files>
         </Group>
